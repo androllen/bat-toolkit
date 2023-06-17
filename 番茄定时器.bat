@@ -27,11 +27,11 @@ echo input_h=%input_h%
 echo input_m=%input_m%
 echo input_s=%input_s%
 
-set init=%time%
-set i_time=%init:~0,8%
-set init_h=%i_time:~0,2%
-set init_m=%i_time:~3,2%
-set init_s=%i_time:~6,2%
+
+set init_time=%time: =0%
+set init_h=%init_time:~0,2%
+set init_m=%init_time:~3,2%
+set init_s=%init_time:~6,2%
 echo %init_h%:%init_m%:%init_s%
 
 
@@ -41,12 +41,18 @@ set /a end_s=1%init_s%-100+%input_s%
 echo %end_h%:%end_m%:%end_s%
 
 if %end_s% GEQ 60 (
-	set /a end_s=%end_s%-60
-	set /a end_m=%end_m%+1
-	if %end_m% GEQ 60 (
-		set /a end_m=%end_m%-60
+	set /a end_s=!end_s!-60
+	set /a end_m=!end_m!+1
+	echo ab=%end_h%:%end_m%:%end_s%
+	if !end_m! GEQ 60 (
+		set /a end_m=!end_m!-60
 		set /a end_h=%end_h%+1
+		echo abc=%end_h%:%end_m%:%end_s%
 	)
+) else if %end_m% GEQ 60 (
+	set /a end_m=%end_m%-60
+	set /a end_h=%end_h%+1
+	echo abcd=%end_h%:%end_m%:%end_s%
 )
 
 set date_today_year=%date:~0,4%
@@ -95,8 +101,9 @@ else if %date_today_month% equ 12 ( set current_month_day=31 )
 echo %date_today_year%-%date_today_month%-%date_today_day%-%current_month_day%
 
 
+
 rem 跨天
-if end_h GEQ 24 (
+if %end_h% GEQ 24 (
 	rem 计算跨过多少天
 	set /a next_day=%end_h%/24
 	echo next_day=!next_day!
@@ -132,18 +139,18 @@ if end_h GEQ 24 (
 
 		) else (
 			rem 没有跨年
-			set calc_date_time=%date_today_year%-!date_today_month!-!date_today_day! !end_h!:%end_m%:%end_s%
-			echo calc_date_time=!calc_date_time!
+			set calc_date_time_no_year=%date_today_year%-!date_today_month!-!date_today_day! !end_h!:%end_m%:%end_s%
+			echo calc_date_time_no_year=!calc_date_time_no_year!
 		)
 	) else (
 	rem 没有跨月
-		set calc_date_time=%date_today_year%-%date_today_month%-!date_today_day! !end_h!:%end_m%:%end_s%
-		echo calc_date_time=!calc_date_time!
+		set calc_date_time_no_month=%date_today_year%-%date_today_month%-!date_today_day! !end_h!:%end_m%:%end_s%
+		echo calc_date_time_no_month=!calc_date_time_no_month!
 	)
 ) else (
 	rem 没有跨天	
-	set calc_date_time=%date_today_year%-%date_today_month%-%date_today_day% %end_h%:%end_m%:%end_s%
-	echo calc_date_time=!calc_date_time!
+	set calc_date_time_no_day=%date_today_year%-%date_today_month%-%date_today_day% %end_h%:%end_m%:%end_s%
+	echo calc_date_time_no_day=!calc_date_time_no_day!
 )
 
 
@@ -151,17 +158,15 @@ if end_h GEQ 24 (
 :start
 choice /t 1 /d y /n >nul
 
-set ctime=%time%
-set r_c_time=%ctime:~0,8%
-set /a current_t_h=1%r_c_time:~0,2%-100
-set /a current_t_m=1%r_c_time:~3,2%-100
-set /a current_t_s=1%r_c_time:~6,2%-100
+set current_time=%time: =0%
+set /a current_t_h=1%current_time:~0,2%-100
+set /a current_t_m=1%current_time:~3,2%-100
+set /a current_t_s=1%current_time:~6,2%-100
 
-set cdate=%date%
-set r_c_date=%cdate:~0,10%
-set current_d_year=%r_c_date:~0,4%
-set /a current_d_month=1%r_c_date:~5,2%-100
-set /a current_d_day=1%r_c_date:~8,2%-100
+
+set current_d_year=%date:~0,4%
+set /a current_d_month=1%date:~5,2%-100
+set /a current_d_day=1%date:~8,2%-100
 
 
 echo current_year_month_day_hour_min_sec:%current_d_year%-%current_d_month%-%current_d_day% %current_t_h%:%current_t_m%:%current_t_s%
