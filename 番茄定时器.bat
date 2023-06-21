@@ -65,24 +65,8 @@ set current_year=%date:~0,4%
 set current_month=%date:~5,2%
 set current_day=%date:~8,2%
 echo %current_year%_%current_month%_%current_day%
-set /a i_d_y_4=%current_year%%%4
-set /a i_d_y_100=%current_year%%%100
-set /a i_d_y_400=%current_year%%%400
-echo i_d_y_4=%i_d_y_4%
-echo i_d_y_100=%i_d_y_100%
-echo i_d_y_400=%i_d_y_400%
 
-if %i_d_y_4% equ 0 (
-	if %i_d_y_100% neq 0 (
-		if %i_d_y_400% equ 0 (
-			echo run
-			set year_=0
-		)
-	)
-) else (
-	echo ping
-	set year_=1
-)
+
 
 
 rem 跨天
@@ -99,13 +83,14 @@ if %end_h% GEQ 24 (
 	call:monthcall
 	echo current_month1=%current_month% month has !current_month_day!
 	set /a current_has_day=!current_month_day!-%current_day%
-	echo this_month_remain_day=%current_has_day%
+	echo this_month_remain_day=!current_has_day!
 
 	goto listloop
 ) else (
 	rem 没有跨天	
 	set calc_date_time_no_day=%current_year%-%current_month%-%current_day% %end_h%:%end_m%:%end_s%
 	echo calc_date_time_no_day=!calc_date_time_no_day!
+
 	goto start
 
 )
@@ -129,6 +114,7 @@ if !current_has_day! GEQ !next_day! (
 		set current_month=0
 		set /a current_year=%current_year%+1
 		echo current_month=!current_month!
+		
 	)
 	call:listloop
 )
@@ -181,11 +167,14 @@ goto:eof
 :monthcall
 if %current_month% equ 1 ( set current_month_day=31 )^
 else if %current_month% equ 2 (
-	if %year_% equ 0 (
-		set current_month_day=29
+	@REM yp的值为1时即表示year为闰年，当yp的值为0是即表示year为平年
+	set /a isleapyear="^!(current_year %% 4) & ^!(^!(current_year %% 100)) | ^!(current_year %% 400)"
+	if !isleapyear! equ 1 (
+		set current_month_day=29 
 	) else (
 		set current_month_day=28
 	)
+	echo current_month_day=%current_month_day%	
 )^
 else if %current_month% equ 3 ( set current_month_day=31 )^
 else if %current_month% equ 4 ( set current_month_day=30 )^
