@@ -26,7 +26,7 @@ setlocal enabledelayedexpansion
 @REM )
 @REM echo %dtt%
 
-set /p day_number=è¾“å…¥å¤©æ•°:
+set /p day_number=ÊäÈëÌìÊı:
 set current_year=%date:~0,4%
 set current_day=%date:~8,2%
 set /a current_month=1%date:~5,2%-100
@@ -68,7 +68,7 @@ goto:eof
 :monthcall
 if %current_month% equ 1 ( set current_month_day=31 )^
 else if %current_month% equ 2 (
-	@REM ypçš„å€¼ä¸º1æ—¶å³è¡¨ç¤ºyearä¸ºé—°å¹´ï¼Œå½“ypçš„å€¼ä¸º0æ˜¯å³è¡¨ç¤ºyearä¸ºå¹³å¹´
+	@REM ypµÄÖµÎª1Ê±¼´±íÊ¾yearÎªÈòÄê£¬µ±ypµÄÖµÎª0ÊÇ¼´±íÊ¾yearÎªÆ½Äê
 	set /a isleapyear="^!(current_year %% 4) & ^!(^!(current_year %% 100)) | ^!(current_year %% 400)"
 	if !isleapyear! equ 1 (
 		set current_month_day=29 
