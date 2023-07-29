@@ -4,6 +4,7 @@ setlocal enabledelayedexpansion
 set /p add_h=输入小时:
 set /p add_m=输入分钟:
 set /p add_s=输入秒针:
+set /p input=输入提示:
 
 if "%add_h%" neq "" (
 	set input_h=%add_h%
@@ -21,6 +22,12 @@ if "%add_s%" neq "" (
 	set input_s=%add_s%
 ) else (
 	set input_s=0
+)
+
+if "%input%" neq "" (
+	set input_=%input%
+) else (
+	set input_="game is over"
 )
 
 echo input_h=%input_h%
@@ -191,7 +198,7 @@ goto:eof
 
 
 :over
-msg * "game is over"
+msg * /time 3600 "%input_%"
 goto:eof
 
 
