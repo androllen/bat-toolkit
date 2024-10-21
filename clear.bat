@@ -8,6 +8,10 @@ for /d %%i in (*) do (
     )
 )
 
+set CurTime=%time: =0%
+set curmm=%CurTime:~3,2%
+set curss=%CurTime:~6,2%
+
 if %find_dir% equ 1 (
 
   cd /D "%cd%\node_modules"
@@ -24,14 +28,12 @@ if %find_dir% equ 1 (
   )
 )
 
-set CurTime=%time: =0%
-set curmm=%CurTime:~3,2%
-set curss=%CurTime:~6,2%
-echo beforeDateTime=%curmm%:%curss%
+
 
 set current_time=%time: =0%
 set mm=%current_time:~3,2%
 set ss=%current_time:~6,2%
+echo beforeDateTime=%curmm%:%curss%
 echo afterDateTime=%mm%:%ss%
 
 cd ..
