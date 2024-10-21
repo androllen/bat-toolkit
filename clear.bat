@@ -1,30 +1,38 @@
 @echo off
-
-cd /D "%cd%\node_modules"
-echo %cd%
-
-set   CurTime=%time%
-set   mm=%CurTime:~3,2%
-set   ss=%CurTime:~6,2%
-set   beforeDateTime=%mm%:%ss%
-
-
-for /d %%i in (*.*) do (
-  echo %%i
-  rd /s /q "%%i"
+set  find_dir=0
+set "target_folder_name=node_modules"
+for /d %%i in (*) do (
+    if "%%i"=="%target_folder_name%" (
+        set find_dir=1
+        echo %%i
+    )
 )
 
+if %find_dir% equ 1 (
 
-for  %%i in (*.*) do (
-  del /s /q "%%i"
+  cd /D "%cd%\node_modules"
+  echo %cd%
+
+  for /d %%i in (*.*) do (
+    echo %%i
+    rd /s /q "%%i"
+  )
+
+
+  for  %%i in (*.*) do (
+    del /s /q "%%i"
+  )
 )
 
-set   CurTime=%time%
-set   mm=%CurTime:~3,2%
-set   ss=%CurTime:~6,2%
-set   afterDateTime=%mm%:%ss%
-set   beforeDateTime
-set   afterDateTime
+set CurTime=%time: =0%
+set curmm=%CurTime:~3,2%
+set curss=%CurTime:~6,2%
+echo beforeDateTime=%curmm%:%curss%
+
+set current_time=%time: =0%
+set mm=%current_time:~3,2%
+set ss=%current_time:~6,2%
+echo afterDateTime=%mm%:%ss%
 
 cd ..
 echo Clear OVER!
