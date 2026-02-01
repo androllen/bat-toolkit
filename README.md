@@ -1,6 +1,6 @@
 # toolkit
 
-bat toolkit
+批处理日常小工具
 
 [推算几天后的日期](afterday.bat)  
 [倒计时钟](TomatoUniversalTimer.bat)  
@@ -10,4 +10,6 @@ bat toolkit
 [清理系统垃圾](SystemLJ.bat)   
 [智能打包为自释放7z文件](drag.bat)   
 
-https://time.org.cn/riqi/
+
+不得用于<span style="color: red;">非法用途</span>
+<!-- [这段文本将被隐藏](https://time.org.cn/riqi/) -->
