@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0165)file://C:\Documents and Settings\administrator.04516C2059B04AC\Local Settings\Temporary Internet Files\Content.IE5\AFT7GAKG\C__DOCUME~1_H00106~1_桌面_中文编~1[1].HTM -->
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META content="MSHTML 6.00.2900.3603" name=GENERATOR></HEAD>
+<BODY><TEXTAREA id=code name=code rows=30 cols=80>
+</TEXTAREA> <INPUT onclick=encode(code,this) type=button value=encode> <INPUT onclick=decode(code,this) type=button value=decode>
+<SCRIPT>
+function encode(obj,btn)
+{
+    obj.value=obj.value.replace(/[^\u0000-\u00FF]/g,function($0){return escape($0).replace(/(%u)(\w{4})/gi,"\\u$2")});
+}
+
+function decode(obj,btn)
+{
+    obj.value=unescape(obj.value.replace(/\\u/g,'%u').replace(/;/g,''));
+}
+</SCRIPT>
+ </BODY></HTML>

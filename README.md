@@ -1,22 +1,20 @@
 # toolkit
 
-批处理日常小工具
+日常批处理小工具
 
-[推算几天后的日期](afterday.bat)  
-[倒计时钟](TomatoUniversalTimer.bat)  
+
+[推算几天后的日期](./Windows/Datetime/afterday.bat)  
+[倒计时钟](./Windows/Datetime/TomatoUniversalTimer.bat)  
+[任意格式转换为exe格式支持多文件拖拽到批处理脚本上](./Windows/Network/aliyunpan.bat)  
+[清理node_modules](./Windows/Web/clear-modules.bat)  
+[清理系统垃圾](./Windows/System/SystemLJ.bat)   
+[智能打包为自释放7z文件](./Windows/Zip/self-release-packaging.bat)   
+[局域网内分享同目录下指定文件夹](./Windows/Devops/share/sharefile.bat)   
+
+ToDo:
+
 [计算两个日期之间差多少天]()  
-[任意格式转换为exe格式支持多文件拖拽到批处理脚本上](aliyunpan.bat)  
-[清理node_modules](clear.bat)  
-[清理系统垃圾](SystemLJ.bat)   
-[智能打包为自释放7z文件](drag.bat)   
 
-[局域网内分享同目录下指定文件夹](局域网内分享同目录下指定文件夹.bat)   
-> 把脚本放在 **tmp文件夹** 上一级目录中，把分享的文件置于tmp文件夹，双击脚本
-```
-Desktop
-├── tmp
-└── 局域网内分享同目录下指定文件夹.bat
-```
 
-不得用于<span style="color: red;">非法用途</span>
+以上不得用于**非法用途**
 <!-- [这段文本将被隐藏](https://time.org.cn/riqi/) -->
